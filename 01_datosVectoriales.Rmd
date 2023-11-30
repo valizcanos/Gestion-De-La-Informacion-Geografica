@@ -1,0 +1,127 @@
+---
+title: "01 Datos Vectoriales"
+author: "Dr. Victor Augusto Lizcano S."
+date: "2023-11-29"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Datos espaciales
+
+Cualquier fenómeno espacial puede ser representado a través de **objetos** discretos (cuyos límites son bien definidos como un bosque, un río  o un asentamiento humano) o continuos (cuyos límites no suelen ser claros como la lluvia o la temperatura). 
+
+Espacialmente, estos **objetos** se suelen representar mediante datos **vectoriales**. Este tipo de datos constant de una descripción geométrica y forma (como puntos, lineas o poligonos). Por ejemplo las fronteras de los países, estados, provincias, prefecturas, departamentos, municipios o condados estan delimitadas por polígonos.
+
+Miremos el siguiente ejemplo en el que representamos en forma de puntos la localización de algunas estaciones climáticas y la magnitud de la variable precipitación:
+
+```{r}
+nombreEstaciones <- LETTERS[1:10] #Las nombraremos con letras para este ejemplo
+longitud <- c(-116.7, -120.4, -116.7, -113.5, -115.5,
+               -120.8, -119.5, -113.7, -113.7, -110.7)
+latitud <- c(45.3, 42.6, 38.9, 42.1, 35.7, 38.9,
+              36.2, 39, 41.6, 36.9)
+estaciones <- cbind(longitud, latitud)
+
+# Simularemos datos de precipitación para este ejemplo
+set.seed(0)
+precip <- round((runif(length(latitud))*10)^3) #Generamos datos aleatorios
+
+psize <- 1 + precip/500
+plot(estaciones, cex=psize, pch=20, col='red', main='Precipitación')
+
+# Agregamos nombres al gráfico
+text(estaciones, nombreEstaciones, pos=4)
+
+# Agregamos leyenda
+breaks <- c(100, 250, 500, 1000)
+legend.psize <- 1+breaks/500
+legend("topright", legend=breaks, pch=20, pt.cex=legend.psize, col='red', bg='gray')
+```
+
+A parte de los datos de tipo **vectorial**, también encontramos los datos tipo **raster**. Estos datos comunmente se emplean para representar espacialmente objetos continuos como la elevación de un terreno.  Los datos **raster** son imágenes, las cuales almacenan sus datos en pixeles y conservan un sistema de referencia de coordenadas al igual que los datos vectoriales.
+
+```{r}
+lon <- c(-116.8, -114.2, -112.9, -111.9, -114.2, -115.4, -117.7)
+lat <- c(41.3, 42.9, 42.4, 39.8, 37.6, 38.3, 37.6)
+esquinasPoligono = cbind(lon,lat)
+plot(estaciones, main="Poligono que delimita el área de 4 estaciones climáticas", pch=20, col="red")
+polygon(esquinasPoligono, col= rgb(0, 1, 0.5, 0.1), border = "black")
+```
+
+### Representación de vectores de tipo punto con R
+
+Veamos el siguiente ejemplo en el cual representamos un conjunto de datos espaciales como vectores tipo punto:
+
+```{r}
+#Vamos a emplear la librería sp para este caso
+library(sp)
+
+#Vamos a crear nuestro conjunto de datos de longitud y latitud
+
+lonx = c(-76.28,-75.17,-73.03,-72.51)
+latx = c(3.29,4.27, 7.10, 11.34)
+dengueCasos = c(79, 56, 49,36)
+coordenadas = cbind(lonx,latx)
+
+puntos = SpatialPoints(coordenadas) #Empleamos la función espatial points de la librería sp para crear nuestros datos vectoriales tipo punto
+
+class(puntos) #Visualizamos la clase de archivo que generamos
+
+showDefault(puntos) #Mostramos la información de nuestro archivo vectorial
+
+# Vemos que aun no hemos definido un sistema de referencia de coordenadas
+
+srcoord <- CRS('+proj=coordenadas +datum=WGS84') #Nuestro src es WGS84
+
+# Ahora reasignamos a nuestra variable el src
+
+puntos =  SpatialPoints(coordenadas, proj4string=srcoord)
+
+showDefault(puntos) #Nuevamente verificamos
+
+#A parte de la longitud y latitud (también el src) nuestra base datos aun carece de atributos.
+#Vamos asignar datos de casos de dengue como eje z (o atributo)
+#Para ello vamos a emplear la librería raster
+
+puntos
+
+library(raster)
+
+puntos = SpatialPointsDataFrame(puntos, data=data.frame(dengueCasos))
+puntos
+
+#Para ver con más detalle
+str(puntos)
+
+# O
+
+showDefault(puntos)
+
+#Ahora observemos nuestros datos en un gráfico
+plot(puntos,axes=TRUE, las=2)
+```
+
+### Representación de vectores de tipo línea con R
+
+Para realizar vectores de líneas en R empleamos la función "spLines" (similar al "SpatialPoints" que empleamos anteriormente).
+
+```{r}
+coordenadas
+lineas = spLines(coordenadas, crs=srcoord)
+showDefault(lineas)
+
+plot(lineas, axes=TRUE)
+```
+
+### Representación de vectores de tipo poligono  con R
+
+Para realizar vectores de líneas en R empleamos la función "spPolygons" (similar al "SpatialPoints" que empleamos anteriormente).
+
+```{r}
+poligonos = spPolygons(coordenadas, crs=srcoord)
+showDefault(poligonos)
+plot(poligonos, axes=TRUE)
+```

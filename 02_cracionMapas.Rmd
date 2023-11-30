@@ -1,0 +1,55 @@
+---
+title: "02 Creación de Mapas en R"
+author: "Dr. Victor Augusto Lizcano S."
+date: "2023-11-29"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Mapas en R
+
+Para poder visualizar nuestros mapas con un conjunto de datos vectoriales vamos a emplear la librería "ggplot2". También emplearemos la librería "rnaturalearth" la cual nos proporciona mapas de todo el mundo.
+
+```{r}
+library(ggplot2)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(sp)
+library(raster)
+theme_set(theme_bw()) ##?theme_bw
+
+elMundo <- ne_countries(scale = "medium", returnclass = "sf") #Retorna poligonos de cada país del mundo, la escala media es de 1:50, la escala larga de 1:10 y la escala pequeña de 1:110. La clase de retorno puede ser sp o sf para datos espaciales
+
+str(elMundo)
+
+#Ahora grafiquemos nuestro mapa 
+
+ggplot(data = elMundo) + geom_sf()
+
+#Decoremos nuestro mapa
+
+ggplot(data = elMundo) + geom_sf() + xlab("Longitud") + ylab("Latitud") +
+  ggtitle("Paises del Mundo", subtitle = paste0("(", length(unique(elMundo$name)), " Paises)"))
+
+#Asignemosle colores
+
+ggplot(data = elMundo) + geom_sf(color="blue", fill = "lightgreen") + xlab("Longitud") + ylab("Latitud") +
+  ggtitle("Paises del Mundo", subtitle = paste0("(", length(unique(elMundo$name)), " Paises)"))
+
+ggplot(data = elMundo) + geom_sf(aes(fill = pop_est)) + # pop_est es una de las variables contenidas en el dataset "elMundo"
+  scale_fill_viridis_c(option = "plasma", trans = "sqrt")+ #plasma es la variante de colores y sqrt la raíz de la población
+  xlab("Longitud") + ylab("Latitud") +
+  ggtitle("Paises del Mundo", subtitle = paste0("(", length(unique(elMundo$name)), " Paises)"))
+
+#https://cengel.github.io/R-spatial/mapping.html
+#https://r-spatial.org/r/2018/10/25/ggplot2-sf.html
+#https://www.statmethods.net/advgraphs/axes.html
+#https://rspatial.org/raster/spatial/3-vectordata.html
+#https://cran.r-project.org/web/packages/raster/raster.pdf
+```
+## Proyección y extensión
+
+Para
