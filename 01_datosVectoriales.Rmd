@@ -2,7 +2,9 @@
 title: "01 Datos Vectoriales"
 author: "Dr. Victor Augusto Lizcano S."
 date: "2023-11-29"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}

@@ -1,0 +1,146 @@
+---
+title: "03 Cargar y manipular shapes"
+author: "Dr. Victor Augusto Lizcano S."
+date: "2023-12-01"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Cargar y manipular datos vectoriales tipo .shp
+
+Para esta sección vamos a emplear datos de áreas político administrativas globales de <a hef="https://gadm.org/">GADM</a>. Descargaremos el mapa de todas las divisiones políticos administrativas (Pais, Departamentos y Municipios) de Colombia.
+
+```{r}
+library(sp)
+library(raster) #Empleamos la librería raster y la función shapefile
+ruta = "col/" #Asigno la ruta en donde estan mis .shp
+
+mapaCol = shapefile(paste(ruta,"gadm41_COL_0.shp",sep=""))
+plot(mapaCol, axes=TRUE)
+
+#Ahora miremos la información de nuestro archivo
+
+str(mapaCol)
+
+#Revisemos el mapa con sus departamentos
+
+mapaDpto = shapefile(paste(ruta,"gadm41_COL_1.shp",sep=""))
+plot(mapaDpto, axes=TRUE)
+
+str(mapaDpto)
+
+# Podemos observar que el shape de los departamentos es una lista con 5 sets de datos como: "data", "polygons", "plotOrder", "bbox" y "proj4String"
+
+#Miremos en "data" que tenemos
+
+mapaDpto@data
+
+#Dentro de "data" tenemos la variable "NAME_1" la cual contiene el nombre de los departamentos. Pidamosle a R que nos muestre los nombres de los departamentos.
+
+mapaDpto@data[["NAME_1"]]
+
+#En este caso "Bogotá D.C." corresponde a la posición 5.
+
+mapaDpto@data[["NAME_1"]][[5]]
+
+#Miremos como se puede graficar ese poligono
+
+mapaDpto[mapaDpto@data[["NAME_1"]]=="Bogotá D.C.",]
+
+plot(mapaDpto[mapaDpto@data[["NAME_1"]]=="Bogotá D.C.",], axes=TRUE)
+
+# Ahora agreguemos otros departamentos
+
+plot(mapaDpto[mapaDpto@data[["NAME_1"]]=="Bogotá D.C.",], axes=TRUE)
+plot(mapaDpto[mapaDpto@data[["NAME_1"]]=="Cundinamarca",], add=TRUE)
+plot(mapaDpto[mapaDpto@data[["NAME_1"]]=="Boyacá",], add=TRUE)
+text(mapaDpto, "NAME_1")
+
+# Por ultimo revisemos los municipios
+
+mapaMpio = shapefile(paste(ruta,"gadm41_COL_2.shp",sep=""))
+plot(mapaMpio, axes=TRUE)
+
+#Exploremos el municipio del Tabio
+plot(mapaMpio[mapaMpio@data[["NAME_2"]]=="Tabio",],axes=TRUE)
+text(mapaMpio, "NAME_2")
+
+```
+
+### Edición de mapas
+
+En esta sección vamos a ver algunas formas de manipular nuestros datos espaciales.
+
+```{r}
+ruta2 = "dane/" #Asigno la ruta en donde estan mis .shp
+mapaDane = shapefile(paste(ruta2,"MGN_DPTO_POLITICO.shp",sep=""))
+plot(mapaDane, axes=TRUE)
+
+str(mapaDane)
+
+#Extraer nombre de dptos y areas
+nombreDpto = mapaDane@data[["DPTO_CNMBR"]]
+areaDpto = mapaDane@data[["Shape_Area"]] * 10000
+
+#Graficar
+
+barplot(areaDpto, names.arg=nombreDpto, col="steelblue", las=2)
+plot(mapaDane, col=rainbow(areaDpto), axes=TRUE)
+spplot(mapaDane,"Shape_Area", axes=TRUE)
+
+```
+
+```{r}
+#Vamos a extraer las coordenadas y los nombres de los dpto
+
+
+coordenadas = coordinates(mapaDane)
+coordenadas = data.frame(coordenadas)
+colnames(coordenadas) = c("Lon","Lat") #Renombramos las columnas
+coordenadas
+
+#Ahora agregramos el nombre de los dptos
+
+Colombia = cbind(coordenadas,nombreDpto,areaDpto)
+colnames(Colombia)[3:4]= c("Nombre","Area")
+str(Colombia)
+
+#Vamos a crear dos variables, hombres y mujeres. Los valores se crearan aleatoriamente
+
+mujeres = runif(33, 100000,1000000)
+hombres = runif(33,100000,1000000)
+
+Colombia = cbind(Colombia, mujeres, hombres)
+Colombia = data.frame(Colombia)
+colnames(Colombia)[5:6]= c("Mujeres", "Hombres")
+str(Colombia)
+summary(Colombia)
+xY = cbind(as.double(coordenadas[,1]),as.double(coordenadas[,2]))
+ColPuntos = SpatialPointsDataFrame(coords =xY,data=Colombia[,c(3:6)], proj4string = CRS('+init=epsg:4326') )
+ColPuntos
+
+magnitudArea = ColPuntos@data["Area"]
+magnitudArea
+
+plot(ColPuntos["Area"],  pch=20, col='red', axes=TRUE,main="Areas por Dpto")
+plot(mapaDane, add=TRUE)
+
+magnitudMujeres = ColPuntos@data["Mujeres"]
+magnitudMujeres
+
+plot(ColPuntos["Mujeres"], pch=20, col='green',axes=TRUE,main="Areas por Dpto")
+plot(mapaDane, add=TRUE)
+
+magnitudHombres = ColPuntos@data["Hombres"]
+magnitudHombres
+plot(ColPuntos["Hombres"],pch=20, col='blue',axes=TRUE,main="Areas por Dpto")
+plot(mapaDane, add=TRUE)
+
+spplot(ColPuntos,"Hombres", axes=TRUE)
+
+```
