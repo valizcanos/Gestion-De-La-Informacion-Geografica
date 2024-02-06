@@ -1,0 +1,148 @@
+\documentclass[12pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{AnnArbor}
+\begin{document}
+	\author{Victor Augusto Lizcano Sandoval}
+	\title{Clase de programación en R - N$^{0}$.5}
+	%\subtitle{}
+	%\logo{}
+	%\institute{}
+	%\date{}
+	%\subject{}
+	%\setbeamercovered{transparent}
+	%\setbeamertemplate{navigation symbols}{}
+	\begin{frame}[plain]
+		\maketitle
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Funciones apply}
+		Las funciones apply son  usadas para aplicar funciones a elementos de una estructura de datos (matrices, data frames, arrays y listas).
+	\end{frame}
+
+\begin{frame}
+	\frametitle{Función apply}
+	\framesubtitle{Para matrices, arreglos y dataframes}
+	df <- data.frame(x = 1:4, y = 5:8, z = 10:13)\\
+	apply(X = df, MARGIN = 1, FUN = sum)\\
+	MARGIN = 1 aplica para filas\\
+	MARGIN = 2 aplica para columnas
+\end{frame}
+
+\begin{frame}
+	\frametitle{Función lapply}
+	\framesubtitle{Para listas. Recibe una lista y devuelve una lista}
+	A <- matrix(1:9,nrow = 3, ncol = 3)\\
+	B <- matrix(11:19,nrow = 3, ncol = 3)\\
+	C <- matrix(21:29,nrow = 3, ncol = 3)\\
+	miLista <- list(A,B,C)\\
+	lapply(miLlista,"$[$",1,1)
+\end{frame}
+
+\begin{frame}
+	\frametitle{Función sapply}
+	\framesubtitle{Para listas. Recibe una lista y devuelve un vector}
+	sapply(miLista,"$[$",1,1)
+\end{frame}
+
+\begin{frame}
+	\frametitle{Función tapply}
+	\framesubtitle{Para factores}
+	x <- 1:20\\
+	y <- factor(rep(letters[1:5], each = 4))\\
+	tapply(x, y, sum)
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Función mapply}
+	\framesubtitle{Para matrices. Devuelve una lista o un vector}
+	mapply(sum, 1:5, 1:5, 1:5) $\#$ Suma el primer elemento de cada vector, después el segundo y luego el tercero\\
+	mapply(rep, 1:4, 4:1) $\#$ Repite cada elemento del primer vector el número de veces que indique el segundo vector.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Función vapply}
+	\framesubtitle{Para listas. Devuelve un vector}
+	x <- list(A = 1, B = 1:3, C = 1:7)\\
+	vapply(x, FUN = length, FUN.VALUE = 0L)
+\end{frame}
+
+\begin{frame}
+	\frametitle{Librería reshape}
+	\framesubtitle{Para transformar la estrucutra de los datos}
+	library(reshape)\\
+	str(mtcars)\\
+	mtcars2 = melt(mtcars,id=c("mpg","cyl"))\\
+	cast(mtcars2, mpg~variable, mean)\\
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Librería readxl}
+	\framesubtitle{Para leer datos de Excel}
+	library(readxl)\\
+	misDatos <- read$\_$excel("mi$\_$archivo.xlsx", sheet = "Hoja 1")
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Texto plano}
+	\framesubtitle{Para leer datos de texto}
+	
+	misDatos <- read.csv("mi$\_$archivo.csv", header = TRUE, na.strings = "NA", dec=".",sep=",",stringsAsFactors = TRUE)\\
+	misDatos <- read.csv2(file.choose(), header = TRUE, na.strings ="NA", dec=",",sep=";",stringsAsFactors = TRUE)\\
+	
+	misDatos <- read.table(mi$\_$archivo.csv, header = TRUE, na.strings ="NA", dec=".",sep="\textbackslash t",stringsAsFactors = TRUE)
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Valores ausentes}
+	\framesubtitle{ NA (not available)-NaN (not a number)}
+	
+	y <- c(1,2,3,NA)\\
+	is.na(y) $\#$  Existencia de datos ausentes\\
+	mean(y, na.rm=TRUE) $\#$ Saca el promedio sin tener en cuenta el dato ausente\\
+	MisDatos[!complete.cases(MisDatos),]  $\#$ Lista las filas de datos que contienen valores ausentes\\
+	DatosSiNA <- na.omit(MisDatos)  $\#$  Crea un conjunto de datos sin valores ausentes\\
+	colSums(is.na(MiDataFrame)) $\#$ Suma datos ausentes por columnas
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Función which}
+	\framesubtitle{Devuelve la posición o el índice del valor que satisface la condición dada}
+	
+	UnVector<- c(5,4,3,2,1)
+	which(UnVector==2)
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ordenar datos}
+	\framesubtitle{Funciones order() y sort()}
+	str(iris)\\
+	sort(iris$\$$Sepal.Length)\\
+	sort(iris$\$$Sepal.Length, decreasing=TRUE)\\
+	order(iris$\$$Sepal.Length)\\
+	order(iris$\$$Sepal.Length, decreasing=TRUE)
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Data cheat sheets}
+	\framesubtitle{Resumen para el manejo de algunas librerías}
+		
+		Las \textit{sata cheat sheets} facilitan el uso de algunos  paquetes. Buscar en  \url{https://www.rstudio.com/resources/cheatsheets/} y descargar la \textit{cheat sheet} de la librería \textit{dplyr}.
+	
+\end{frame}
+
+
+\end{document}

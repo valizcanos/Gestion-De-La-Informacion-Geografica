@@ -56,7 +56,7 @@ plot(mapaDpto[mapaDpto@data[["NAME_1"]]=="Bogotá D.C.",], axes=TRUE)
 
 # Ahora agreguemos otros departamentos
 
-plot(mapaDpto[mapaDpto@data[["NAME_1"]]=="Bogotá D.C.",], axes=TRUE)
+plot(mapaDpto[mapaDpto@data[["NAME_1"]]=="Bogotá D.C.",], ylim=c(3.5,6.5), axes=TRUE)
 plot(mapaDpto[mapaDpto@data[["NAME_1"]]=="Cundinamarca",], add=TRUE)
 plot(mapaDpto[mapaDpto@data[["NAME_1"]]=="Boyacá",], add=TRUE)
 text(mapaDpto, "NAME_1")
@@ -138,7 +138,7 @@ plot(mapaDane, add=TRUE)
 
 magnitudHombres = ColPuntos@data["Hombres"]
 magnitudHombres
-plot(ColPuntos["Hombres"],pch=20, col='blue',axes=TRUE,main="Areas por Dpto")
+plot(ColPuntos["Hombres"], pch=20, col='blue',axes=TRUE,main="Areas por Dpto")
 plot(mapaDane, add=TRUE)
 
 spplot(ColPuntos,"Hombres", axes=TRUE)

@@ -1,0 +1,181 @@
+\documentclass[12pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{AnnArbor}
+\begin{document}
+	\author{Victor Augusto Lizcano Sandoval}
+	\title{Clase de programación en R - N$^{0}$.5}
+	%\subtitle{}
+	%\logo{}
+	%\institute{}
+	%\date{}
+	%\subject{}
+	%\setbeamercovered{transparent}
+	%\setbeamertemplate{navigation symbols}{}
+	\begin{frame}[plain]
+		\maketitle
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Gráficos en R}
+		Para realizar gráficos en \textbf{R} usamos la función \textit{plot()}.
+	\end{frame}
+
+\begin{frame}
+	\frametitle{Gráficos en R - Ejemplo}
+	x $<-$ c(1, 2, 3, 4, 5)\\
+	y $<-$ c(3, 7, 8, 9, 12)\\
+	
+	plot(x, y)
+\end{frame}
+
+\begin{frame}
+	\frametitle{Gráficos en R - Ejemplo}
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.5\linewidth]{Grafica1}
+		
+		\label{fig:grafica1}
+	\end{figure}
+\end{frame}
+
+	\begin{frame}
+		\frametitle{Gráficos en R - Ejemplo: tipos}
+		j =1:20\\
+		k = x\\
+		
+		par(mfrow = c(1, 3))\\
+		
+		plot(j, k, type = "l", main = "type = 'l'")\\
+		plot(j, k, type = "s", main = "type = 's'")\\
+		plot(j, k, type = "p", main = "type = 'p'")\\
+		
+		par(mfrow = c(1, 1))\\
+		
+		plot(x, y)
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Gráficos en R - Ejemplo: tipos}
+		\begin{figure}
+			\centering
+			\includegraphics[width=0.6\linewidth]{Grafica2}
+			
+			\label{fig:grafica2}
+		\end{figure}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Gráficos en R - Ejemplo: tipos}
+			j =1:20\\
+		    k = x\\
+		    par(mfrow = c(1, 3))\\
+		    
+		    plot(j, k, type = "o", main = "type = 'o'")\\
+		    plot(j, k, type = "b", main = "type = 'b'")\\
+		    plot(j, k, type = "h", main = "type = 'h'")\\
+		    
+		    par(mfrow = c(1, 1))
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Gráficos en R - Ejemplo: tipos}
+		\begin{figure}
+			\centering
+			\includegraphics[width=0.6\linewidth]{Grafica3}
+		
+			\label{fig:grafica3}
+		\end{figure}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Gráficos en R - Ejemplo: tipos}
+		
+		\begin{table}
+			\begin{tabular}{cc}
+				\hline
+				Tipo& Descripción \\
+				\hline
+				l& linea \\
+				
+				p&puntos  \\
+				
+				b&puntos y lineas \\
+				
+				o&puntos y lineas sobrepuestas \\
+				
+				s&escaleras  \\
+				
+				h&estilo histograma  \\
+				
+				n&no gráfica  \\
+				\hline
+			\end{tabular}
+		\end{table}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Gráficos en R - Parámetros}
+		
+		\begin{table}
+			\begin{tabular}{cc}
+				\hline
+				Parámetro& Descripción \\
+				\hline
+				pch&  Tipo de puntos (va de 1 a 25)\\
+				
+				lwd&Ancho de linea (va de 0 a 6) \\
+				
+				col&  Color del gráfico \\
+				
+				lty &  Estilo de línea (va de 0 a 6)\\
+				
+				cex& Cambia el tamaño de los puntos (se maneja en fracciones)\\
+				
+				xlim&  Límite del eje x \\
+				
+				ylim & Límite del eje y  \\
+				
+				bg & Color de fondo  \\
+				
+				main & Título  \\
+				
+				cex.main & Tamaño  de título  \\
+				
+				cex.axis & Tamaño  anotaciones de los ejes\\
+				
+				cex.label & Tamaño  anotaciones de las etiquetas\\
+				
+				\hline
+			\end{tabular}
+		\end{table}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Gráficos en R - Parámetros}
+		\begin{table}
+			\begin{tabular}{cc}
+				\hline
+				Parámetro& Descripción \\
+				\hline
+				cex.sub&  Tamaño  de subtítulos\\
+				fg&  Trazar color de primer plano\\
+				font&  Fuente\\
+				font.axis&  Fuente de anotaciones de eje\\
+				font.lab&  Fuente de anotaciones de etiqueta\\
+				font.main&  Fuente de titulo\\
+				family&  Familia de fuente\\
+				\hline
+			\end{tabular}
+		\end{table}
+	\end{frame}
+
+
+\end{document}

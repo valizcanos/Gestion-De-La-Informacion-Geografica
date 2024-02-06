@@ -1,0 +1,275 @@
+\documentclass[11pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{AnnArbor}
+\begin{document}
+	\author{Victor Augusto Lizcano Sandoval}
+	\title{Clase de programación en R - N$^{0}$.3}
+	%\subtitle{}
+	%\logo{}
+	%\institute{}
+	%\date{}
+	%\subject{}
+	%\setbeamercovered{transparent}
+	%\setbeamertemplate{navigation symbols}{}
+	\begin{frame}[plain]
+		\maketitle
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Ejemplo sentencias if}
+		
+		Crear una sentencia if para la siguiente función ramificada:\\
+		
+		\begin{equation}
+		f(x)= \left\{ \begin{array}{lcc}
+		0, &   si  & x <2 \\
+		\\ x/10 ,&  si & 2 \leq x \leq 5 \\
+		\\ 1, &  si  & x > 5
+		\end{array}
+		\right.
+		\end{equation}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Ejemplo sentencias if}
+		
+		Aplica el condicional if para identificar hombres y mujeres mayores de 18 años:\\
+		
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Ejemplo sentencias if}
+		
+		A partir de los siguientes conjuntos de vectores (\textbf{x} e  \textbf{y}) aplicar sentencias if para identificar hombres y mujeres mayores de 18 años:\\
+		
+		x <$-$ c("hombre", "hombre", "mujer", "hombre", "mujer")\\
+		y <$-$ c(10, 14, 80, 56, 27)
+		
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{¿?}
+		
+		\textbf{\textit{the condition has length > 1 and only the first element will be used}}
+		
+	\end{frame}
+
+		\begin{frame}
+		\frametitle{Función ifelse}
+		
+		La función ifelse evalúa una condición en todos los elementos de un vector. En donde se cumple dicha condición asigna un valor determinado, mientras que en donde no se cumple asigna un valor alternativo.
+		
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Función ifelse}
+		
+		\textbf{\textit{ifelse(condición, valor1, valor2)}}\\
+		
+		x = 1:10\\
+		clasif = ifelse(x > 5, 'grande', 'chico')\\
+		clasif = paste(x, clasif)\\
+		clasif
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Ejemplo sentencias if}
+		
+		A partir de los siguientes conjuntos de vectores (\textbf{x} e  \textbf{y}) aplicar sentencias if para identificar hombres y mujeres mayores de 18 años:\\
+		\vspace{1cm}
+		
+		x <$-$ c("hombre", "hombre", "mujer", "hombre", "mujer")\\
+		y <$-$ c(10, 14, 80, 56, 27)\\
+		\vspace{1cm}
+		
+		ifelse (x == "hombre", ifelse(y > 18, "Hombre adulto", "Hombre menor de edad"), ifelse(y > 18, "Mujer adulta", "Mujer menor de edad"))
+		
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Blucle while}
+		
+		Los bucles (\textbf{\textit{loops}}) pueden ejecutar un bloque de código siempre que se alcance una condición específica.\\
+		\vspace{1cm}
+		
+		Con el bucle \textit{while} podemos ejecutar un conjunto de declaraciones siempre que una condición sea VERDADERA:
+		
+	\end{frame}
+
+
+\begin{frame}
+	\frametitle{Blucle while - Ejemplo}
+	
+	Imprime el valor de \textit{i} hasta que sea menor o igual a 6.\\
+	\vspace{1cm}
+	
+	i=0\\
+	
+	while(i<=6)\{\\
+		print(i)\\
+		i = i+1\\
+   \}
+	
+\end{frame}
+
+	\begin{frame}
+		\frametitle{Sentencia break}
+		
+		Con la instrucción \textit{break}, podemos detener el ciclo incluso si la condición while es VERDADERA.
+		
+	\end{frame}	
+
+	\begin{frame}
+		\frametitle{while + break - Ejemplo}
+		
+		Detener el blucle while cuando \textit{i} sea igual a 4.\\
+		
+		i=0\\
+		
+		while(i=6)\{\\
+		print(i)\\
+		i <$-$ i+1\\
+		if(i==4)\{
+			break\\
+	    \}\\
+		\}
+		
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Sentencia next}
+		
+		Con la  declaración \text{next}, podemos omitir una iteración sin terminar el ciclo.
+		
+	\end{frame}
+
+\begin{frame}
+	\frametitle{while + next - Ejemplo}
+	
+	Saltar el blucle while cuando \textit{i} sea igual a 3.\\
+	
+	i=0\\
+	
+	while(i=6)\{\\
+	i <$-$ i+1\\
+	if(i==3)\{
+	next\\
+	\}\\
+	print(i)\\
+	\}
+	
+\end{frame}
+
+	\begin{frame}
+		\frametitle{Bucle while + if - ejemplo}
+		
+		horaCena=0\\
+		
+		while(horaCena<=8)\{\\
+			if(horaCena < 8)\{\\
+				print("No es hora de cenar")\\
+			\}else\{print("ya es hora")\}\\
+			horaCena = horaCena + 1\}
+		
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{bucle for}
+		El bucle \textit{for} se utiliza para iterar sobre una secuencia
+	\end{frame}
+
+	\begin{frame}
+	\frametitle{bucle for - Ejemplo}
+	listaFrutas = c("Banano","Mango","Papaya","Pera")\\
+	
+	for(i in listaFrutas)\{\\
+		print(i)\}\\
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{bucle for - Ejemplo}
+	Elemento <- list("Manzana", 4, 2.5, "casa", 1, 5, "perro")\\
+	
+	for (x in Elemento) \{\\
+		if (x == "casa") \{\\
+			break\\
+		\}\\
+		print(x)\\
+	\}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{bucle for - Ejemplo}
+	Elemento <- list("Manzana", 4, 2.5, "casa", 1, 5, "perro")\\
+	
+	for (x in Elemento) \{\\
+		if (x == "casa") \{\\
+			next\\
+		\}\\
+		print(x)\\
+	\}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{bucle for - Ejemplo}
+	MartrixAleatoria = matrix(0,5,5)\\
+	
+	
+	for(i in 1:nrow(MartrixAleatoria))\{\\
+		for(j in 1:ncol(MartrixAleatoria))\{\\
+			MartrixAleatoria[i,j] = runif(1,-1,1)\}\}\\
+	
+	MartrixAleatoria
+	
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Crear funciones}
+	
+	Para crear una función, use la palabra clave function ().
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Crear funciones - Ejemplo}
+	
+	Cree la función cuadrática e identifique el valor de x para $6x^{2}-17x+12=0$
+	
+	\begin{equation}
+	ax^{2}+ bx + c=0
+	\end{equation}
+	
+	\begin{equation}
+	x =\frac{-b \pm \sqrt{b^{2}-4ac}}{2a}
+	\end{equation}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Crear funciones - Ejemplo}
+	
+	Cree la función cuadrática e identifique el valor de x para $6x^{2}-17x+12=0$
+	
+	fCuadratica = function(a,c,b)\{ \\
+
+		xPositivo = (-b + sqrt(b$\wedge$2 - 4*a*c))/(2*a)\\
+		xNegativo = (-b - sqrt(b$\wedge$2 - 4*a*c))/(2*a)\\
+
+		Respuesta = paste("x+ = ", xPositivo, " x- = ", xNegativo) \\
+		return(Respuesta) \\
+	\} \\
+fCuadratica(6,-17,12)
+	\end{frame}
+
+\end{document}

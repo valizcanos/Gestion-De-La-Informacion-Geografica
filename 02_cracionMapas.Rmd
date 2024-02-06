@@ -21,7 +21,7 @@ library(rnaturalearth)
 library(rnaturalearthdata)
 library(sp)
 library(raster)
-theme_set(theme_bw()) ##?theme_bw
+theme_set(theme_bw()) ##?theme_bw establece el tema en blanco y negro es una función de ggplot2
 
 elMundo <- ne_countries(scale = "medium", returnclass = "sf") #Retorna poligonos de cada país del mundo, la escala media es de 1:50, la escala larga de 1:10 y la escala pequeña de 1:110. La clase de retorno puede ser sp o sf para datos espaciales
 
@@ -49,7 +49,7 @@ ggplot(data = elMundo) + geom_sf(aes(fill = pop_est)) + # pop_est es una de las 
 
 ## Proyección y extensión
 
-Los sistemas de coordenadas geográficas se basan en una superficie esferoidal (ya sea verdaderamente esférica o elipsoidal) que se aproxima a la superficie de la Tierra. Un **datum** suele definir la superficie (radio ex para una esfera, eje mayor y eje menor o aplanamiento inverso para un elipsoide) y la posición de la superficie en relación con el centro de la Tierra. Por ejemplo:
+Los sistemas de coordenadas geográficas se basan en una superficie esferoidal (ya sea verdaderamente esférica o elipsoidal) que se aproxima a la superficie de la Tierra. Un **datum** suele definir la superficie (radio para una esfera, eje mayor y eje menor o aplanamiento inverso para un elipsoide) y la posición de la superficie en relación con el centro de la Tierra. Por ejemplo:
 <br>
 
 <center>
@@ -111,6 +111,10 @@ ggplot(data = elMundo) +
     geom_sf() +
     coord_sf(crs = "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs")
 
+# Los parámetros +lat_0=52, +lon_0=10, +x_0=4321000 y +y_0=3210000 son parámetros de la proyección de Lambert Azimuthal Equal Area (LAEA).
+
+# La proyección LAEA es una proyección cartográfica que preserva el área y la forma de los continentes, pero distorsiona la distancia y la dirección. Esta proyección se utiliza comúnmente para representar regiones polares y se basa en un punto central que se utiliza como origen de coordenadas. Los parámetros +lat_0 y +lon_0 definen la latitud y longitud del punto central, mientras que +x_0 y +y_0 definen las coordenadas del punto central en metros.
+
 #+proj=laea: es el tipo de proyección que se está utilizando, en este caso, Lambert Azimuthal Equal Area (LAEA).
 #+lat_0=52: es el paralelo de origen en grados, que es la latitud en la que el plano del mapa toca la esfera terrestre.
 #+lon_0=10: es el meridiano central en grados, que es la longitud en la que el plano del mapa toca la esfera terrestre.
@@ -129,7 +133,7 @@ ggplot(data = elMundo) +
 
 ```
 <br>
-Recordemos que la **proyección**  es el método empleado para traducir una posición en el globo o geoide en una posición en un mapa bidimensional (es decir con x,y coordenadas). Las proyecciones pueden preservar ciertas propiedades como el área, la dirección (ángulos) o las longitudes. En el caso del **elipsoide**, este es un modelo matemático o de referencia empleado para aproximar la forma de la superficie terrestre. 
+Recordemos que la **proyección**  es el método empleado para traducir una posición en el globo o geoide en una posición en un mapa bidimensional (es decir con x,y coordenadas). Las proyecciones pueden preservar ciertas propiedades como el área, la dirección (ángulos) o las longitudes. En el caso del **elipsoide**, este es un modelo matemático o de referencia empleado para aproximar la forma de la superficie terrestre. Este se basa en una serie de parámetros que definen la longitud del eje mayor, la longitud del eje menor y la forma general del elipsoide. Estos parámetros se utilizan para calcular la latitud, la longitud y la altitud de un punto en la Tierra. 
 
 **Nota:** el falso este y el falso norte son valores lineales que se aplican al origen de las coordenadas x e y, respectivamente. Se utilizan en los sistemas de coordenadas proyectadas para asegurar que todas las coordenadas x e y sean positivas (<a href="https://help.arcgis.com/en/geodatabase/10.0/sdk/arcsde/concepts/geometry/coordref/coordsys/projected/mapprojections.htm">Ver</a>).
 

@@ -11,9 +11,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## **Sistemas de referencia de coordenadas**
+## **Sistemas de referencia de coordenadas (SRC)**
 
-Un sistema de referencia de coordenadas (Coordinate Reference System, CRS) es un marco utilizado para medir la posición de cualquier objeto (real o imaginario) sobre  la superficie de la Tierra mediante el uso de las  coordenadas. En términos sencillos, las proyecciones cartográficas intenta transformar la tierra de su forma esférica (3D) a una forma plana (2D).
+Un sistema de referencia de coordenadas (Coordinate Reference System, CRS) es un marco utilizado para medir la posición de cualquier objeto (real o imaginario) sobre  la superficie de la Tierra mediante el uso de las  coordenadas (aplicadas a una superficie esférica o elipsiodal, o a una superficie plana). En el caso de las superficies planas, esta emplean proyecciones cartográficas intenta transformar la tierra de su forma esférica (3D) (SRC grográficas) a una forma plana (2D) (SRC proyectadas).
 
 ### **Familia de proyecciones cartográficas**
 
@@ -33,10 +33,12 @@ Sistemas de coordenadas geográficas: Estos sistemas utilizan la latitud y la lo
 ![WGS 84](geographic_crs.png)
 </center>
 
-Sistemas de coordenadas proyectadas: Estos sistemas proyectan la tierra, que es tridimensional, en un plano bidimensional. Esto permite medir distancias y áreas. Un ejemplo común es el sistema de coordenadas Universal Transverse Mercator (UTM).
+Sistemas de coordenadas proyectadas: Estos sistemas proyectan la tierra, que es tridimensional, en un plano bidimensional (2D). Esto permite medir distancias y áreas. Un ejemplo común es el sistema de coordenadas Universal Transverse Mercator (UTM).
 
 <center>
 ![UTM](utm_zones.png)
 </center>
 
 ### **Diferencia entre Datum y SRC**
+
+El datum se utiliza para definir la forma (una esfera, un elipsoide o un geoide) y la orientación de la Tierra, y se basa en una serie de puntos de referencia que se utilizan para medir la latitud, la longitud y la altitud. Estos puntos de referencia pueden ser físicos, como montañas o ríos, o pueden ser puntos imaginarios que se han definido matemáticamente. En cambio  el SRC se utiliza para representar la ubicación de los objetos en la Tierra, ya sea en coordenadas geográficas o proyectadas.

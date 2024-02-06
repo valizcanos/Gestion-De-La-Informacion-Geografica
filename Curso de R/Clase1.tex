@@ -1,0 +1,334 @@
+\documentclass[12pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{AnnArbor}
+\begin{document}
+	\author{Victor Augusto Lizcano Sandoval}
+	\title{Clase de programación en R - N$^{0}$.1}
+	%\subtitle{}
+	%\logo{}
+	%\institute{}
+	%\date{}
+	%\subject{}
+	%\setbeamercovered{transparent}
+	%\setbeamertemplate{navigation symbols}{}
+	\begin{frame}[plain]
+		\maketitle
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{¿Qué es R?}
+		R es un lenguaje de programación comúnmente empleado para análisis estadístico y matemático. 
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{"Hello World!"}
+
+		\texttt{> Hello World!}\\
+		\texttt{Error: unexpected symbol in "Hello World"}\\
+		\texttt{> "Hello World!"}\\
+		\texttt{[1] "Hello World!"}\\
+		\texttt{> print("Hello World!")}\\
+		\texttt{[1] "Hello World!"}	\\					
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Función print()}
+		\texttt{> print(5+5)}\\
+		\texttt{[1] 10}\\
+		\texttt{> print("5+5")}\\
+		\texttt{[1] "5+5"}		
+		
+	\end{frame}
+
+	\begin{frame}
+	\frametitle{Función cat()}
+	
+	La función cat() se utiliza para imprimir en la pantalla o en un archivo.
+	
+	\texttt{> cat("Hola como estás?")}\\
+	\texttt{Hola como estás?}\\
+	\texttt{> cat("hola\textbackslash ncómo\textbackslash nestás?")}\\
+	\texttt{hola}\\
+	\texttt{cómo}\\
+	\texttt{estás?}		
+\end{frame}
+
+	\begin{frame}
+		\frametitle{Función cat()}
+		\texttt{> cat(5+5)}\\
+		\texttt{10}\\
+		\texttt{> cat("5+5")}\\
+		\texttt{5+5}\\
+		\texttt{> cat(1:5, sep="-")}\\
+		\texttt{1-2-3-4-5}\\
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Comentarios \#}
+		
+		\texttt{>\# Este es un comentario}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Variables}
+		
+		Las variables son contenedores para el almacenamiento de datos.
+		
+	\end{frame}
+
+	\begin{frame}
+	\frametitle{Variables}
+	
+	Las variables son contenedores para el almacenamiento de datos.
+	
+\end{frame}
+
+	\begin{frame}
+	\frametitle{Variables}
+		\texttt{> \#variables \\}
+		\texttt{> Nombre = "María"}\\
+		\texttt{> Apellido <- "Magdalena"}\\
+		\texttt{> Nombre}\\
+		\texttt{[1] "María"}\\
+		\texttt{> Apellido}\\
+		\texttt{[1] "Magdalena"}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Variables}
+		
+		\texttt{> x = 2}\\
+		\texttt{> y = 5}\\
+		\texttt{> x}\\
+		\texttt{[1] 2}\\
+		\texttt{> y}\\
+		\texttt{[1] 5}
+		
+	\end{frame}
+
+
+	\begin{frame}
+		\frametitle{Notación de variables}
+		
+		1. Camel Case (contarElementos)\\
+		2. Pascal Case (ContarElementos)\\
+		3. Snake Case (contar\_elementos)\\
+		4. Kebab Case (contar$-$elementos)
+		
+	\end{frame}
+
+	\begin{frame}
+	\frametitle{Reglas - declaración de variables}
+	
+	\begin{itemize}
+		\item Una variable, siempre debe iniciar con una letra (mayúscula o minúscula) ó un guión bajo (\_).
+		\item Una variable, puede contener números, solamente después de  la primer letra (siguiendo la regla anterior).
+		\item No es permitido dejar un espacio en blanco a lo largo de la variable.
+		\item Aunque una variable puede ser del largo que tú desees, lo recomendable es que sea una variable corta (regularmente entre 20 y 30 caracteres como máximo).
+		\item No puedes utilizar palabras reservadas para la declaración de una variable.
+		\item El nombre de una variable en R es case sensitive (es decir, a lo largo de tu programa debe escribirse exactamente igual).
+		\item Utiliza un nombre que exprese algo del contexto en el cual la estás declarando.
+	\end{itemize}
+\end{frame}
+
+
+	\begin{frame}
+		\frametitle{Múltiples variables }
+		\texttt{var1 <$-$ var2 <$-$ var3 <$-$ "Naranja"}\\
+		\texttt{var1}\\
+		\texttt{[1] "Naranja"}\\
+		\texttt{var2}\\
+		\texttt{[1] "Naranja"}\\
+		\texttt{var3}\\
+		\texttt{[1] "Naranja"}
+	\end{frame}
+	
+
+	\begin{frame}
+		\frametitle{Concatenación de elementos}
+		\texttt{\#Concatenación}\\
+		\texttt{Texto = "Fantástica"}\\
+		\texttt{paste("Eres una persona",Texto, sep=" ")}\\
+		\texttt{[1] "Eres una persona Fantástica"}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Tipos de datos}
+		\texttt{\# numeric}\\
+		\texttt{x <$-$ 10.5}\\
+		\texttt{class(x)}\\
+		\texttt{\# integer}\\
+		\texttt{x <$- $1000L}\\
+		\texttt{class(x)}\\
+		\texttt{\# complex}\\
+		\texttt{x <$-$ 9i + 3}\\
+		\texttt{class(x)}\\
+		\texttt{\# character/string}\\
+		\texttt{x <$-$ "R is exciting"}\\
+		\texttt{class(x)}\\
+		\texttt{\# logical/boolean}\\
+		\texttt{x <$-$ TRUE}\\
+		\texttt{class(x)}		
+		
+	\end{frame}
+
+
+	\begin{frame}
+	\frametitle{Conversión de tipo}
+	
+	\texttt{x = 1L \# integer}\\
+	\texttt{y = 2 \# numeric}\\
+	\texttt{\# convert from integer to numeric:}\\
+	\texttt{a = as.numeric(x)}\\
+	\texttt{\# convert from numeric to integer:}\\
+	\texttt{b <$-$ as.integer(y)}\\
+	\texttt{\# print values of x and y}\\
+	\texttt{x}\\
+	\texttt{y}\\
+	\texttt{\# print the class name of a and b}\\
+	\texttt{class(a)}\\
+	\texttt{class(b)}
+	
+	\end{frame}
+
+
+	\begin{frame}
+		\frametitle{Matemáticas}
+		\texttt{10 $+$ 5 \#Suma}\\
+		\texttt{10 $-$ 5 \#Resta}\\
+		\texttt{max(5, 10, 15) \#Máximo}\\
+		\texttt{min(5, 10, 15) \#Mínimo}\\
+		\texttt{sqrt(16) \#Raíz cuadrada}\\
+		\texttt{sd(1:5) \#Desviación estandar}\\
+		\texttt{abs(-4.7) \#Valor absoluto}\\
+		\texttt{ceiling(1.4) \#Redondear arriba}\\
+		\texttt{floor(1.4) \#Redondear abajo}
+	\end{frame}
+
+
+	\begin{frame}
+		\frametitle{Cadenas de texto}
+		\texttt{str <$-$ "We are the so-called  $\backslash$"Vikings$\backslash$"  , from the north."}\\
+		\texttt{cat(str)}\\
+		\texttt{We are the so-called "Vikings", from the north.}\\
+		\texttt{str}\\
+		\texttt{[1] "We are the so-called  $\backslash$"Vikings$\backslash$" , from the north."}\\
+		\texttt{nchar(str) \#Longitud de la cadena}
+		
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Caracteres especiales}
+		
+		\begin{table}
+			\centering
+		\begin{tabular}{cc}
+			\hline
+			$\backslash \backslash$  & Backslash\\
+			$\backslash$n& Nueva linea\\
+			$\backslash$r&  Retorno\\
+			$\backslash$t&  tab\\
+			$\backslash$b&  Retroceso\\
+			\hline
+		\end{tabular}
+	\end{table}
+		
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Booleanos}
+		
+		10 > 9    \# TRUE because 10 is greater than 9 \\
+		10 == 9   \# FALSE because 10 is not equal to 9 \\
+		10 < 9    \# FALSE because 10 is greater than 9
+		
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Operadores aritmeticos}
+		Suma ($+$)\\
+		Resta ($-$) \\
+		Multiplicación ($*$)\\
+		División ($/$) \\
+		Exponente ($\hat{}$)\\
+		Módulo ($\%\%$) \\
+		Divisón de enteros ($\%/\%$)
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Operadores de asignación}
+		
+		my\_var <$-$ 3 \\
+		
+		my\_var = 3 \\
+		
+		my\_var $\ll$$-$ 3\\
+		
+		3 $-$> my\_var\\
+		
+		3 $-$$\gg$ my\_var		
+		
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Operadores de comparación}
+		\begin{table}
+			\centering
+		\begin{tabular}{cc}
+			\hline
+			$==$  & Igual\\
+			$!=$& No igual\\
+			$>$&  Mayor que\\
+			$<$& Menor que\\
+			$>=$&  Mayor o igual que\\
+			$<=$& Menor o igual que\\
+			\hline
+		\end{tabular}
+	\end{table}
+	
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Operadores lógicos}
+		
+		\begin{table}
+			\centering
+			\begin{tabular}{cc}
+				\hline
+				$\&$  &Operador "y" \\
+				$\&\&$& Operador "y"\\
+				$|$&  Operador "o"\\
+				$||$& Operador "o"\\
+				$!$&  Operador "No"\\
+				\hline
+			\end{tabular}
+		\end{table}
+		
+		
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Operadores miscelaneos}
+		
+		\begin{table}
+			\centering
+			\begin{tabular}{cc}
+				\hline
+				$:$&  Crear secuencia de números\\
+				$\%in\%$& Buscar un elemento dentro un vector\\
+				$\%*\%$&  Multiplicar matriz\\
+				\hline
+			\end{tabular}
+		\end{table}
+		
+	\end{frame}
+
+
+\end{document}

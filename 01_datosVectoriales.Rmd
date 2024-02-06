@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Cualquier fenómeno espacial puede ser representado a través de **objetos** discretos (cuyos límites son bien definidos como un bosque, un río  o un asentamiento humano) o continuos (cuyos límites no suelen ser claros como la lluvia o la temperatura). 
 
-Espacialmente, estos **objetos** se suelen representar mediante datos **vectoriales**. Este tipo de datos constant de una descripción geométrica y forma (como puntos, lineas o poligonos). Por ejemplo las fronteras de los países, estados, provincias, prefecturas, departamentos, municipios o condados estan delimitadas por polígonos.
+Espacialmente, estos **objetos** se suelen representar mediante datos **vectoriales**. Este tipo de datos constan de una descripción geométrica y forma (como puntos, lineas o poligonos). Por ejemplo las fronteras de los países, estados, provincias, prefecturas, departamentos, municipios o condados estan delimitadas por polígonos.
 
 Miremos el siguiente ejemplo en el que representamos en forma de puntos la localización de algunas estaciones climáticas y la magnitud de la variable precipitación:
 
@@ -76,7 +76,20 @@ showDefault(puntos) #Mostramos la información de nuestro archivo vectorial
 
 # Vemos que aun no hemos definido un sistema de referencia de coordenadas
 
-srcoord <- CRS('+proj=coordenadas +datum=WGS84') #Nuestro src es WGS84
+srcoord <- CRS('+init=epsg:4326') #Nuestro src es WGS84, 
+#código +init=epsg:4326 se refiere al código EPSG para el sistema de coordenadas geográficas WGS 84
+
+#Además de +init, existen otros parámetros que se pueden utilizar para definir un sistema de referencia de coordenadas (CRS) en R. Algunos de los parámetros más comunes son:
+
+# +init: Define el Sistema de Referencia de Coordenadas (CRS) basado en el EPSG
+# +proj: Define la proyección utilizada por el CRS.
+# +datum: Define el datum utilizado por el CRS.
+# +ellps: Define el elipsoide utilizado por el CRS.
+# +units: Define las unidades utilizadas por el CRS.
+# +no_defs: Indica que no se deben utilizar las definiciones de CRS por defecto.
+# Por ejemplo: "+proj=merc +datum=WGS84 +units=m", en este caso se definió un CRS utilizando la proyección de Mercator, el datum WGS84 y las unidades de metros
+#El código EPSG es un identificador numérico único que se utiliza para identificar un sistema de coordenadas específico
+
 
 # Ahora reasignamos a nuestra variable el src
 
@@ -103,8 +116,10 @@ str(puntos)
 showDefault(puntos)
 
 #Ahora observemos nuestros datos en un gráfico
-plot(puntos,axes=TRUE, las=2)
+plot(puntos,cex=dengueCasos/10, axes=TRUE, las=2)
 ```
+
+Información de intrés <a href="extension://nhppiemcomgngbgdeffdgkhnkjlgpcdi/data/pdf.js/web/viewer.html?file=https%3A%2F%2Fwww.nceas.ucsb.edu%2Fsites%2Fdefault%2Ffiles%2F2020-04%2FOverviewCoordinateReferenceSystems.pdf"> Overview of Coordinate Reference Systems (CRS) in R</a>
 
 ### Representación de vectores de tipo línea con R
 

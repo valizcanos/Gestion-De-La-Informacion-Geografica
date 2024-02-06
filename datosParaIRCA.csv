@@ -1,0 +1,6 @@
+Ciudad,x,y,Color aparente,Turbiedad,pH,COT,Nitritos,Nitratos,Fluoruros,Calcio,Alcalinidad total,Cloruros,Aluminio 3,Dureza total,Hierro total,Magnesio,Manganeso,Molibdeno,Sulfatos,Zinc,Fosfatos,Cloro residual libre,Coliformes T,E. Coli
+Cali,-76.52522,3.439459,36,85,2,3,0.54,0,0.29,75,51,62,0,77,0.57,51,0,0.01,90,1,0.90,0,0,0
+Bogotá,-74.08158,4.625550,8,97,9,5,0.81,5,0.60,94,107,120,1,293,0.56,39,1,0.02,155,2,0.02,3,0,0
+Mdellín,-75.57627,6.250221,25,132,6,1,0.32,8,0.41,72,112,124,1,28,0.13,26,1,0.05,202,4,0.55,3,0,0
+Barranquilla,-74.80731,10.994209,66,14,3,8,0.20,8,0.07,69,285,133,1,225,0.78,28,1,0.01,205,1,0.80,1,0,0
+Cartagena,-75.49297,10.397318,19,74,6,3,0.31,3,0.17,90,123,281,0,115,0.30,10,0,0.09,180,2,0.20,3,0,0
